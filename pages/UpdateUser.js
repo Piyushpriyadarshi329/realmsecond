@@ -1,5 +1,5 @@
 /*Screen to update the user*/
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -10,9 +10,10 @@ import {
 import Mybutton from './components/Mybutton';
 import Realm from 'realm';
 import _ from 'lodash';
+import Mytextinput from './components/Mytextinput';
 let realm;
 
-function UpdateUser({navigation}) {
+function UpdateUser({ navigation }) {
   const [data, setdata] = useState({
     user_id: '',
     user_name: '',
@@ -21,7 +22,7 @@ function UpdateUser({navigation}) {
   });
 
   useEffect(() => {
-    realm = new Realm({path: 'UserDatabase.realm'});
+    realm = new Realm({ path: 'UserDatabase.realm' });
   }, []);
 
   console.log('datatop', data);
@@ -76,7 +77,7 @@ function UpdateUser({navigation}) {
                       onPress: () => navigation.navigate('HomeScreen'),
                     },
                   ],
-                  {cancelable: false},
+                  { cancelable: false },
                 );
               } else {
                 alert('User Updation Failed');
@@ -105,50 +106,50 @@ function UpdateUser({navigation}) {
     [setdata],
   );
   return (
-    <View style={{backgroundColor: 'white', flex: 1}}>
+    <View style={{ backgroundColor: 'white', flex: 1 }}>
       <ScrollView keyboardShouldPersistTaps="handled">
         <KeyboardAvoidingView
           behavior="padding"
-          style={{flex: 1, justifyContent: 'space-between'}}>
-          <TextInput
+          style={{ flex: 1, justifyContent: 'space-between' }}>
+          <Mytextinput
             placeholder="Enter User Id"
             onChangeText={text => {
               setdata(p => {
                 console.log('pid', p);
-                return {...data, user_id: text};
+                return { ...data, user_id: text };
               });
             }}
           />
           <Mybutton title="Search User" customClick={searchUser} />
-          <TextInput
+          <Mytextinput
             placeholder="Enter Name"
             value={data.user_name}
             onChangeText={change}
           />
-          <TextInput
+          <Mytextinput
             placeholder="Enter Contact No"
             value={data.user_contact}
             onChangeText={text => {
               setdata(p => {
                 console.log('Changed contact');
 
-                return {...p, user_contact: text};
+                return { ...p, user_contact: text };
               });
             }}
             maxLength={10}
             keyboardType="numeric"
           />
-          <TextInput
+          <Mytextinput
             value={data.user_address}
             placeholder="Enter Address"
             onChangeText={text => {
               setdata(p => {
                 console.log('p', p);
 
-                return {...data, user_address: text};
+                return { ...data, user_address: text };
               });
             }}
-            style={{textAlignVertical: 'top'}}
+            style={{ textAlignVertical: 'top' }}
           />
           <Mybutton title="Update User" customClick={updateUser} />
         </KeyboardAvoidingView>

@@ -1,12 +1,12 @@
 /*Screen to register the user*/
-import React, {useState, useEffect} from 'react';
-import {View, ScrollView, KeyboardAvoidingView, Alert} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, KeyboardAvoidingView, Alert } from 'react-native';
 import Mytextinput from './components/Mytextinput';
 import Mybutton from './components/Mybutton';
 import Realm from 'realm';
 let realm;
 
-function RegisterUser({navigation}) {
+function RegisterUser({ navigation }) {
   const [data, setdata] = useState({
     user_name: '',
     user_contact: '',
@@ -14,7 +14,7 @@ function RegisterUser({navigation}) {
   });
 
   useEffect(() => {
-    realm = new Realm({path: 'UserDatabase.realm'});
+    realm = new Realm({ path: 'UserDatabase.realm' });
   }, []);
 
   // constructor(props) {
@@ -42,29 +42,29 @@ function RegisterUser({navigation}) {
       });
       Alert.alert(
         'Success',
-        'You are registered successfully',
+        'registration successfull',
         [
           {
             text: 'Ok',
             onPress: () => navigation.navigate('HomeScreen'),
           },
         ],
-        {cancelable: false},
+        { cancelable: false },
       );
     });
   }
 
   return (
-    <View style={{backgroundColor: 'white', flex: 1}}>
+    <View style={{ backgroundColor: 'white', flex: 1 }}>
       <ScrollView keyboardShouldPersistTaps="handled">
         <KeyboardAvoidingView
           behavior="padding"
-          style={{flex: 1, justifyContent: 'space-between'}}>
+          style={{ flex: 1, justifyContent: 'space-between' }}>
           <Mytextinput
             placeholder="Enter Name"
             onChangeText={text => {
               setdata(p => {
-                return {...p, user_name: text};
+                return { ...p, user_name: text };
               });
             }}
           />
@@ -72,7 +72,7 @@ function RegisterUser({navigation}) {
             placeholder="Enter Contact No"
             onChangeText={text => {
               setdata(p => {
-                return {...p, user_contact: text};
+                return { ...p, user_contact: text };
               });
             }}
             maxLength={10}
@@ -82,13 +82,13 @@ function RegisterUser({navigation}) {
             placeholder="Enter Address"
             onChangeText={text => {
               setdata(p => {
-                return {...p, user_address: text};
+                return { ...p, user_address: text };
               });
             }}
             maxLength={225}
             numberOfLines={5}
             multiline={true}
-            style={{textAlignVertical: 'top'}}
+            style={{ textAlignVertical: 'top' }}
           />
           <Mybutton title="Submit" customClick={register_user} />
         </KeyboardAvoidingView>
